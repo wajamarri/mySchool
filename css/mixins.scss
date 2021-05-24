@@ -1,0 +1,108 @@
+@import url(https://fonts.googleapis.com/css?family=Exo+2:200i);
+@mixin banner{
+    width: 100%;
+    position: relative;
+    color: white;
+    .banner-content{
+      position: absolute;
+      top: 50px;
+      width: 100%;
+    }
+    img{
+      width: 100%;
+    }
+    span{
+      font-size: $bannerHeading;
+      display: block;
+      text-transform: uppercase;
+      font-weight: bold;
+      @include mQ(3000px, 1200px){
+        font-size: 68px;
+      }
+    }
+    span.sub-title{
+      font-weight: normal;
+      margin-bottom: 30px;
+    }
+    @include mQ(1200px){
+      max-height: 640px;
+      overflow: hidden;
+    }
+  }
+  @mixin container($float,$width){
+    float: $float;
+    width: $width;
+  }
+  
+  @mixin clearFix{
+    &:after{
+      content: "";
+      display: block;
+      clear: both;
+    }
+  }
+
+  @mixin button-bg($bg){
+    background: $bg;
+    &:hover{
+      background: darken($bg,8%);
+      transition: all 0.3s ease;
+    }
+    &:active{
+      background: darken($bg,25%);
+    }
+  }
+  @mixin button{
+    color: $offWhite;
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+    font-family: 'Poiret One', cursive;
+    font-size: 1em;
+    cursor: pointer;
+  }
+  @mixin circle-neon{
+    :root {
+      /* Base font size */
+      font-size: 10px;   
+      
+      /* Set neon color */
+      --neon-text-color: #f40;
+      --neon-border-color: #08f;
+    }
+    
+    body {
+      display: flex;
+    }
+    .neon {
+      padding: 4rem 6rem 5.5rem;
+      border: 0.4rem solid #fff;
+      border-radius: 50%;
+      text-transform: uppercase;
+      animation: flicker 1.5s infinite alternate;     
+    }
+  }
+  
+  @mixin grid($cols, $mgn){
+    float: left;
+    width: ((100% - (($cols - 1) * $mgn)) / $cols );
+    margin-right: $mgn;
+    margin-bottom: $mgn;
+    &:nth-child(#{$cols}n){
+      margin-right: 0;
+    }
+  }
+
+  @mixin mQ($args...){
+    @if length($args) == 1{
+      @media screen and (max-width: nth($args, 1)){
+        @content;
+      }
+    }
+    @if length($args) == 2{
+      @media screen and (max-width: nth($args, 1)) and (min-width: nth($args, 2)){
+        @content;
+      }
+    }
+  }
+  
